@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class Age {
-  
   static int days;
   static int months;
   static int years;
-  // int currentDay;
-  // int currentMonth;
-  // int currentYear;
 
-  // int currentDay = int.parse(DateFormat("dd").format(DateTime.now()));
-  // int currentMonth = int.parse(DateFormat("MM").format(DateTime.now()));
-  // int currentYear = int.parse(DateFormat("yyyy").format(DateTime.now()));
+  static int currentDay = int.parse(DateFormat("dd").format(DateTime.now()));
+  static int currentMonth = int.parse(DateFormat("MM").format(DateTime.now()));
+  static int currentYear = int.parse(DateFormat("yyyy").format(DateTime.now()));
+  static int _days3 = _exactDay(currentMonth, currentYear);
 
   // get the exact days in the year
-  _exactDay(int month, int year) {
+  static _exactDay(int month, int year) {
     int daysEx;
     if (month == 1 ||
         month == 3 ||
@@ -38,49 +34,51 @@ class Age {
     return daysEx;
   }
 
-  static getYears(int birthYear, int currentYear) {
+  static getYears(int birthYear) {
     years = currentYear - birthYear;
     return years;
   }
 
-  static getMonths(int birthMonth, int currentMonth) {
+  static getMonths(int birthMonth) {
     if (currentMonth - birthMonth >= 0) {
       months = currentMonth - birthMonth;
     } else {
       months = ((currentMonth + 12) - birthMonth);
-      Age.years -= 1;
+      years -= 1;
     }
     return months;
   }
 
-  static getDays(int birthDay, int currentDay) {
+  static getDays(int birthDay) {
     if (currentDay - birthDay >= 0) {
       days = (currentDay - birthDay);
     } else {
-      days = ((currentDay - birthDay) + birthDay);
-      Age.months -= 1;
+      days = ((currentDay + _days3) - birthDay);
+      if (months != 0) {
+        months -= 1;
+      }
     }
     return days;
   }
 
   static getNextYears() {}
 
-  static getNextMonths(int currMonth, int birthMonth) {
+  static getNextMonths(int birthMonth) {
     int nextMonth = 0;
-    if (birthMonth - currMonth >= 0) {
-      nextMonth = birthMonth - currMonth;
+    if (birthMonth - currentMonth >= 0) {
+      nextMonth = birthMonth - currentMonth;
     } else {
-      nextMonth = (birthMonth + 12 - currMonth) - 1;
+      nextMonth = (birthMonth + 12 - currentMonth) - 1;
     }
     return nextMonth;
   }
 
-  static getNextDays(int currDays, int birthDay) {
+  static getNextDays(int birthDay) {
     int nextDays;
-    if (birthDay - currDays >= 0) {
-      nextDays = (birthDay - currDays);
+    if (birthDay - currentDay >= 0) {
+      nextDays = (birthDay - currentDay);
     } else {
-      nextDays = ((birthDay + 31) - currDays) - 1;
+      nextDays = ((birthDay + 31) - currentDay) - 1;
     }
     return nextDays;
   }

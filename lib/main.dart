@@ -25,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int nextYear = 0;
   int nextMonths = 0;
   int nextDays = 0;
-
   int yourYears = 0;
   int yourMonths = 0;
   int yourDays = 0;
@@ -40,6 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var textStyle1 =
         TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: prColor);
 
+    // Age age = Age();
+
     Future showDatePicker1() async {
       DateTime date = await showDatePicker(
           context: context,
@@ -53,19 +54,32 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
 
-    currentDay = int.parse(DateFormat("dd").format(DateTime.now()));
-    currentMonth = int.parse(DateFormat("MM").format(DateTime.now()));
-    currentYear = int.parse(DateFormat("yyyy").format(DateTime.now()));
+    // currentDay = int.parse(DateFormat("dd").format(DateTime.now()));
+    // currentMonth = int.parse(DateFormat("MM").format(DateTime.now()));
+    // currentYear = int.parse(DateFormat("yyyy").format(DateTime.now()));
 
     void calculateAge() {
       setState(() {
-        yourYears = Age.getYears(yearPicked, currentYear);
-        yourMonths = Age.getMonths(monthPicked, currentMonth);
-        yourDays = Age.getDays(dayPicked, currentDay);
-        nextMonths = Age.getNextMonths(currentMonth, monthPicked);
-        nextDays = Age.getNextDays(currentDay, dayPicked);
-        print(Age.months);
-        print(Age.years);
+        Age.getYears(yearPicked);
+        Age.getMonths(monthPicked);
+        Age.getDays(dayPicked);
+        yourYears = Age.years;
+        yourMonths = Age.months;
+        yourDays = Age.days;
+        nextMonths = Age.getNextMonths(monthPicked);
+        nextDays = Age.getNextDays(dayPicked);
+        yourMonths = Age.months;
+      });
+    }
+
+    void clearData() {
+      setState(() {
+        yourYears = 0;
+        yourDays = 0;
+        yourMonths = 0;
+        yourDays = 0;
+        nextMonths = 0;
+        nextDays = 0;
       });
     }
 
@@ -154,21 +168,21 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("$currentDay",
+                  Text("${Age.currentDay}",
                       style:
                           TextStyle(fontSize: 27, fontWeight: FontWeight.w700)),
                   Text(
                     "/",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
                   ),
-                  Text("$currentMonth",
+                  Text("${Age.currentMonth}",
                       style:
                           TextStyle(fontSize: 27, fontWeight: FontWeight.w700)),
                   Text(
                     "/",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
                   ),
-                  Text("$currentYear",
+                  Text("${Age.currentYear}",
                       style:
                           TextStyle(fontSize: 27, fontWeight: FontWeight.w700)),
                   SizedBox(
@@ -216,7 +230,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         "CLEAR",
                         style: TextStyle(fontSize: 23),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        clearData();
+                      },
                       textColor: Colors.white,
                       color: prColor,
                     )
