@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int currentDay, currentMonth, currentYear;
     Size screen_size = MediaQuery.of(context).size;
     var textStyle1 =
         TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: prColor);
@@ -54,10 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
 
-    // currentDay = int.parse(DateFormat("dd").format(DateTime.now()));
-    // currentMonth = int.parse(DateFormat("MM").format(DateTime.now()));
-    // currentYear = int.parse(DateFormat("yyyy").format(DateTime.now()));
-
     void calculateAge() {
       setState(() {
         Age.getYears(yearPicked);
@@ -68,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
         yourDays = Age.days;
         nextMonths = Age.getNextMonths(monthPicked);
         nextDays = Age.getNextDays(dayPicked);
-        yourMonths = Age.months;
+        
       });
     }
 

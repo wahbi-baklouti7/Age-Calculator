@@ -40,7 +40,7 @@ class Age {
   }
 
   static getMonths(int birthMonth) {
-    if (currentMonth - birthMonth >= 0) {
+    if (currentMonth - birthMonth > 0) {
       months = currentMonth - birthMonth;
     } else {
       months = ((currentMonth + 12) - birthMonth);
@@ -61,14 +61,13 @@ class Age {
     return days;
   }
 
-  static getNextYears() {}
 
   static getNextMonths(int birthMonth) {
     int nextMonth = 0;
     if (birthMonth - currentMonth >= 0) {
       nextMonth = birthMonth - currentMonth;
     } else {
-      nextMonth = (birthMonth + 12 - currentMonth) - 1;
+      nextMonth = (birthMonth + 12 - currentMonth);
     }
     return nextMonth;
   }
@@ -78,14 +77,9 @@ class Age {
     if (birthDay - currentDay >= 0) {
       nextDays = (birthDay - currentDay);
     } else {
-      nextDays = ((birthDay + 31) - currentDay) - 1;
+      nextDays = ((birthDay + _days3) - currentDay);
     }
     return nextDays;
   }
 
-  static ageCalculator(int year) {
-    int currentYear = DateTime.now().year;
-    int resutl = currentYear - year;
-    return resutl.toString();
-  }
 }
