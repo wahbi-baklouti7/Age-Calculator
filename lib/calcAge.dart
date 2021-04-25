@@ -61,7 +61,6 @@ class Age {
     return days;
   }
 
-
   static getNextMonths(int birthMonth) {
     int nextMonth = 0;
     if (birthMonth - currentMonth >= 0) {
@@ -81,5 +80,4 @@ class Age {
     }
     return nextDays;
   }
-
 }
