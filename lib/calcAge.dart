@@ -44,7 +44,10 @@ class Age {
       months = currentMonth - birthMonth;
     } else {
       months = ((currentMonth + 12) - birthMonth);
-      years -= 1;
+      if (months == 12) {
+        months = 0;
+      }else{years -= 1;}
+      
     }
     return months;
   }
@@ -66,7 +69,7 @@ class Age {
     if (birthMonth - currentMonth >= 0) {
       nextMonth = birthMonth - currentMonth;
     } else {
-      nextMonth = (birthMonth + 12 - currentMonth);
+      nextMonth = (birthMonth + 12 - currentMonth)-1;
     }
     return nextMonth;
   }
